@@ -115,7 +115,7 @@ class Stock(object):
         tmp.Volume /= tmp.Volume.max()
         lowst = min_p-rng/4
         tmp = tmp.assign(tooltip=[x.strftime('%Y/%m/%d, %H:%M') for x in tmp['Datetime']])
-        p = figure(plot_width=1600, plot_height=600, title=f'Stock name: "{self.name}"', background_fill_color="#fafafa", tools='wheel_zoom,box_zoom,pan,reset,save',y_range=(lowst, max_prc+0.1*rng))
+        p = figure(plot_width=1600, plot_height=600, title=f'Stock name: "{self.name}"', background_fill_color="#fafafa", tools='box_zoom,wheel_zoom,pan,reset,save',active_drag='box_zoom',  toolbar_location="above", y_range=(lowst, max_prc+0.1*rng))
         source = ColumnDataSource(data=dict(Index=tmp.index.tolist(), Datetime=tmp['Datetime'].tolist(), prc=tmp['Avg'].tolist(),\
                                             vol=tmp['Volume'].tolist(), tooltip=tmp['tooltip'].tolist()))
         source0 = ColumnDataSource(data=dict(price_centers=df_v['price_centers'].tolist(), volume_dist=df_v['volume_dist'].tolist()))
